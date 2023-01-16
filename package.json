@@ -2,6 +2,14 @@
   "name": "nlw-setup",
   "version": "0.1.0",
   "private": true,
+  "author": "Wallace Ferreira",
+  "description": "Project develop during NLW Return from Rockeatseat",
+  "homepage": "https://github.com/wallaceferreira149/nlw-setup.git",
+  "engines": {
+    "node": ">=16.15.1",
+    "yarn": ">=1.22.5",
+    "npm": "please use yarn"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
