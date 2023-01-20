@@ -1,9 +1,7 @@
-export interface IHabit {}
+export interface IHabitDay {}
 
-export const Habit: React.FC<IHabit> = ({}) => {
+export const HabitDay: React.FC<IHabitDay> = ({ ...props }) => {
   return (
-    <div className="bg-gray-400 font-bold">
-      <h1 className="text-2xl text-blue-500">Tailwind</h1>
-    </div>
+    <div className="w-10 h-10 bg-zinc-900 border-2 border-zinc-800 rounded-lg"></div>
   );
 };
