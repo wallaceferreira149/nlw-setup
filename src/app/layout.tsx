@@ -12,7 +12,9 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body className="bg-background w-screen h-screen flex justify-center items-center text-white">
+        <div className="w-full max-w-5xl px-6 gap-16 ">{children}</div>
+      </body>
     </html>
   );
 }
