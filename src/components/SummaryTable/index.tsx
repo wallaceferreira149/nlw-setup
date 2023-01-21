@@ -1,5 +1,5 @@
 import { generateDatesFromYearBegining } from '@/utils/generate-dates-from-year-begining';
-import { HabitDay } from '../Habit';
+import { HabitDay } from '../HabitDay';
 
 export interface ISummaryTable {}
 
