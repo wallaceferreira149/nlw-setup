@@ -1,10 +1,9 @@
 import '@/lib/dayjs';
-import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Popover from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import { AiOutlineCheck } from 'react-icons/ai';
 import { ProgressBar } from '../ProgressBar';
+import { HabitsList } from './HabitsList';
 
 export interface IHabitDay {
   date: Date;
@@ -45,18 +44,7 @@ export const HabitDay: React.FC<IHabitDay> = ({
             {dayAndMont}
           </span>
           <ProgressBar progress={completedPercentage} />
-          <div className="mt-6 flex flex-col gap-3">
-            <Checkbox.Root className="flex items-center gap-3 group">
-              <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500">
-                <Checkbox.Indicator>
-                  <AiOutlineCheck size={20} className="text-white" />
-                </Checkbox.Indicator>
-              </div>
-              <span className="font-semibold text-xl text-white leading-tight group-data-[state=checked]:line-through group-data-[state=checked]:text-zinc-400 duration-300">
-                Almoçar feijoada
-              </span>
-            </Checkbox.Root>
-          </div>
+          <HabitsList date={date} />
           <Popover.Arrow height={8} width={16} className="fill-zinc-900" />
         </Popover.Content>
       </Popover.Portal>
