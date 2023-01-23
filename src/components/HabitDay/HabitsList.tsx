@@ -6,6 +6,7 @@ import { AiOutlineCheck } from 'react-icons/ai';
 
 interface IHabitsList {
   date: Date;
+  onCompletedChange: (completed: number) => void;
 }
 
 interface IHabitsInfo {
@@ -17,7 +18,7 @@ interface IHabitsInfo {
   completedHabits: string[];
 }
 
-export function HabitsList({ date }: IHabitsList) {
+export function HabitsList({ date, onCompletedChange }: IHabitsList) {
   const [habitsInfo, setHabitsInfo] = useState<IHabitsInfo>();
   useEffect(() => {
     api
@@ -29,6 +30,29 @@ export function HabitsList({ date }: IHabitsList) {
       .then((response) => setHabitsInfo(response.data));
   }, []);
 
+  async function handleToggleHabit(habitId: string) {
+    await api.patch(`/habits/${habitId}/toggle`);
+
+    const isHabitAlreadyCompleted =
+      habitsInfo!.completedHabits.includes(habitId);
+
+    let completedHabits: string[] = [];
+    if (isHabitAlreadyCompleted) {
+      completedHabits = habitsInfo!.completedHabits.filter(
+        (id) => id !== habitId
+      );
+    } else {
+      completedHabits = [...habitsInfo!.completedHabits, habitId];
+    }
+
+    setHabitsInfo({
+      possibleHabits: habitsInfo!.possibleHabits,
+      completedHabits,
+    });
+
+    onCompletedChange(completedHabits.length);
+  }
+
   const isDayInPast = dayjs(date).endOf('day').isBefore(new Date());
 
   return (
@@ -39,6 +63,7 @@ export function HabitsList({ date }: IHabitsList) {
           className="flex items-center gap-3 group"
           disabled={isDayInPast}
           checked={habitsInfo.completedHabits.includes(habit.id)}
+          onCheckedChange={() => handleToggleHabit(habit.id)}
         >
           <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500">
             <Checkbox.Indicator>

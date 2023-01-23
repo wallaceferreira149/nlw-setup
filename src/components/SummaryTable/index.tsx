@@ -40,19 +40,20 @@ export const SummaryTable: React.FC<ISummaryTable> = ({}) => {
       </div>
 
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        {summaryDates.map((date) => {
-          const dayInSummary = summary.find((day) => {
-            return dayjs(date).isSame(day.date, 'day');
-          });
-          return (
-            <HabitDay
-              date={date}
-              completed={dayInSummary?.completed}
-              amount={dayInSummary?.amount}
-              key={date.toDateString()}
-            />
-          );
-        })}
+        {summary.length > 0 &&
+          summaryDates.map((date) => {
+            const dayInSummary = summary.find((day) => {
+              return dayjs(date).isSame(day.date, 'day');
+            });
+            return (
+              <HabitDay
+                date={date}
+                defaultCompleted={dayInSummary?.completed}
+                amount={dayInSummary?.amount}
+                key={date.toDateString()}
+              />
+            );
+          })}
         {amountOfDaysToFill > 0 &&
           Array.from({ length: amountOfDaysToFill }).map((_, i) => (
             <div

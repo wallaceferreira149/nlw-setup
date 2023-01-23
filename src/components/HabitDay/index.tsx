@@ -2,24 +2,31 @@ import '@/lib/dayjs';
 import * as Popover from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { ProgressBar } from '../ProgressBar';
 import { HabitsList } from './HabitsList';
 
 export interface IHabitDay {
   date: Date;
-  completed?: number;
+  defaultCompleted?: number;
   amount?: number;
 }
 
 export const HabitDay: React.FC<IHabitDay> = ({
-  completed = 0,
+  defaultCompleted = 0,
   amount = 0,
   date,
 }: IHabitDay) => {
+  const [completed, setCompleted] = useState(defaultCompleted);
+
   const completedPercentage =
     amount > 0 ? Math.round((completed / amount) * 100) : 0;
   const dayAndMont = dayjs(date).format('DD/MM');
   const dayOfWeek = dayjs(date).format('dddd');
+
+  function handleCompletedChange(completed: number) {
+    setCompleted(completed);
+  }
 
   return (
     <Popover.Root>
@@ -33,7 +40,7 @@ export const HabitDay: React.FC<IHabitDay> = ({
           'bg-violet-700 border-violet-500':
             completedPercentage >= 40 && completedPercentage < 60,
           'bg-violet-600 border-violet-500':
-            completedPercentage >= 80 && completedPercentage <= 80,
+            completedPercentage >= 60 && completedPercentage < 80,
           'bg-violet-500 border-violet-400': completedPercentage >= 80,
         })}
       />
@@ -44,7 +51,7 @@ export const HabitDay: React.FC<IHabitDay> = ({
             {dayAndMont}
           </span>
           <ProgressBar progress={completedPercentage} />
-          <HabitsList date={date} />
+          <HabitsList date={date} onCompletedChange={handleCompletedChange} />
           <Popover.Arrow height={8} width={16} className="fill-zinc-900" />
         </Popover.Content>
       </Popover.Portal>
