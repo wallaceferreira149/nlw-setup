@@ -46,7 +46,10 @@ export const NewHabitForm: React.FC<INewHabitForm> = ({}) => {
   }
 
   return (
-    <form onSubmit={createNewHabit} className="w-full flex flex-col mt-6">
+    <form
+      onSubmit={createNewHabit}
+      className="w-full flex flex-col mt-6 bg-zinc-900 text-white"
+    >
       <label htmlFor="title" className="font-semibold leading-tight">
         Qual seu comprometimento?
       </label>

@@ -13,7 +13,7 @@ export const Header: React.FC<IHeader> = ({}) => {
     setIsModalOpen(true);
   }
   return (
-    <header className="w-full max-w-3xl mx-auto flex items-center justify-between">
+    <header className="w-full max-w-3xl mx-auto flex items-center justify-between bg-background">
       <Image src={logoImage} alt="Habits logotipo NLW" />
 
       <Dialog.Root>

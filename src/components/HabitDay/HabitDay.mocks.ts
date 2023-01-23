@@ -1,8 +1,9 @@
 import { IHabitDay } from './index';
 
 const base: IHabitDay = {
+  date: new Date(),
+  defaultCompleted: 4,
   amount: 5,
-  completed: 4,
 };
 
 export const mockHabitDayProps = {
