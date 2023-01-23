@@ -27,7 +27,7 @@ export const SummaryTable: React.FC<ISummaryTable> = ({}) => {
     });
   }, []);
   return (
-    <section className="w-full flex gap-3">
+    <section className="w-full flex gap-3 bg-background">
       <div className="grid grid-rows-7 grid-flow-row gap-3">
         {weekOfDays.map((dayWeek, index) => (
           <div
